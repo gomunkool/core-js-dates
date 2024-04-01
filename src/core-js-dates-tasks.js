@@ -149,19 +149,8 @@ function isDateInPeriod(date, period) {
  * '1999-01-05T02:20:00.000Z' => '1/5/1999, 2:20:00 AM'
  * '2010-12-15T22:59:00.000Z' => '12/15/2010, 10:59:00 PM'
  */
-function formatDate(date) {
-  const dateObject = new Date(date);
-  const day = dateObject.getDate();
-  const month = dateObject.getMonth() + 1;
-  const year = dateObject.getFullYear();
-  const hours = dateObject.getHours();
-  const minutes = dateObject.getMinutes();
-  const seconds = dateObject.getSeconds();
-  const amOrPm = hours >= 12 ? 'PM' : 'AM';
-  const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
-  const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
-  const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
-  return `${day}/${month}/${year}, ${formattedHours}:${formattedMinutes}:${formattedSeconds} ${amOrPm}`;
+function formatDate(/* date */) {
+  throw new Error('Not implemented');
 }
 
 /**
@@ -206,19 +195,8 @@ function getCountWeekendsInMonth(month, year) {
  * Date(2024, 0, 31) => 5
  * Date(2024, 1, 23) => 8
  */
-function getWeekNumberByDate(date) {
-  const firstDayOfYear = new Date(date.getFullYear(), 0, 1);
-  const firstWeekDay = firstDayOfYear.getDay();
-  const daysPassed = Math.floor(
-    (date - firstDayOfYear) / (24 * 60 * 60 * 1000)
-  );
-  let weekNumber;
-  if (firstWeekDay === 0) {
-    weekNumber = Math.ceil((daysPassed + 1) / 7);
-  } else {
-    weekNumber = Math.ceil((daysPassed - firstWeekDay + 1) / 7);
-  }
-  return weekNumber;
+function getWeekNumberByDate(/* date */) {
+  throw new Error('Not implemented');
 }
 
 /**
@@ -234,12 +212,10 @@ function getWeekNumberByDate(date) {
  */
 function getNextFridayThe13th(date) {
   const nextFriday13th = new Date(date);
-  while (true) {
+  while (nextFriday13th.getDate() !== 13 || nextFriday13th.getDay() !== 5) {
     nextFriday13th.setDate(nextFriday13th.getDate() + 1);
-    if (nextFriday13th.getDate() === 13 && nextFriday13th.getDay() === 5) {
-      return nextFriday13th;
-    }
   }
+  return nextFriday13th;
 }
 
 /**
